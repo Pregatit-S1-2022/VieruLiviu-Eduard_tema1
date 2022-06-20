@@ -37,7 +37,7 @@ namespace Register
         {
             con.Open();
             if (chkRemember.Checked == true)
-            {
+            {            
                 txtUser.Text = "SELECT username = '" + txtUser.Text + "' FROM tbl_users";
             }
         }
@@ -45,6 +45,11 @@ namespace Register
         private void btnLogin_Click(object sender, EventArgs e)
         {
             con.Open();
+            
+            // cand folosesti string concatenation pentru query din baza de date, risti sql injections. Adica, un user rau poate sa scrie
+            // la in txtUser: mimo OR 1=1;-- conditie care nu mai verifica nici un user :) . Sau daca vrea sa iti faca rau, 
+            // m; drop table tbl_users --
+            
             string login = "SELECT * FROM tbl_users WHERE Username = '"+txtUser.Text+"' and Password = '"+txtPass.Text+"'";
             cmd = new OleDbCommand(login, con);  
             OleDbDataReader dr = cmd.ExecuteReader();
