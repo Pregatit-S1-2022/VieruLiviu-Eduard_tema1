@@ -42,10 +42,15 @@ namespace Register
                 txtPass.Text = "";
                 txtConfirmPass.Text = "";
             }
+            
+            // just disable the button if this fields are empty, no need for messages :)
             if(txtUser.Text == "" && txtPass.Text == "")
             {
                 MessageBox.Show("Username and Password fields are empty.", "Registration failed.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
+            // nu ai nevoie de check-ul asta daca dupa fiecare if de mai sus ai fi facut return;
+            // in cazul acela, daca ajungea codul aici, erai sigur ca conditiile au fost indeplinite.
             if (txtPass.Text == txtConfirmPass.Text && txtPass.Text.Length > 10 && txtConfirmPass.Text.Length > 10)
             {
                 
@@ -55,6 +60,8 @@ namespace Register
                     OleDbDataAdapter da = new OleDbDataAdapter();
                     con.Open();
 
+// din nou concatenare de string, mare grija la sql injection. De obicei se folosesc parametrii iar aceea vor fi verificati automat si 
+//nu poate user-ul sa scrie mizerii.
                     string register = "INSERT INTO tbl_users VALUES ('" + txtEmail.Text + "','" + txtUser.Text + "', '"+ txtPass.Text+"')";
                     cmd = new OleDbCommand(register, con);
                     cmd.ExecuteNonQuery();
