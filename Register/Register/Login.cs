@@ -50,6 +50,7 @@ namespace Register
             // la in txtUser: mimo OR 1=1;-- conditie care nu mai verifica nici un user :) . Sau daca vrea sa iti faca rau, 
             // m; drop table tbl_users --
             
+            // plus ca logica asta ar trebui sa fie intr-un serviciu si nu direct in cod behind din pagina
             string login = "SELECT * FROM tbl_users WHERE Username = '"+txtUser.Text+"' and Password = '"+txtPass.Text+"'";
             cmd = new OleDbCommand(login, con);  
             OleDbDataReader dr = cmd.ExecuteReader();
