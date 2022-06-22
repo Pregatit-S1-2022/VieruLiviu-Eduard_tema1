@@ -38,6 +38,7 @@ namespace Register
             con.Open();
             if (chkRemember.Checked == true)
             {            
+            // daca rulezi query asta risti sql injection.
                 txtUser.Text = "SELECT username = '" + txtUser.Text + "' FROM tbl_users";
             }
         }
